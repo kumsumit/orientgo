@@ -13,8 +13,7 @@ import (
 	"sync"
 	"testing"
 	"time"
-
-	"gopkg.in/istreamdata/orientgo.v2"
+	"orient"
 )
 
 func init() {
@@ -358,6 +357,9 @@ func TestRecordsWithDate(t *testing.T) {
 
 	var docs []*orient.Document
 	err = db.Command(orient.NewSQLQuery("select from Cat where @rid=" + jj.RID.String())).All(&docs)
+	if err != nil{
+		log.Printf("Error: %v", err)
+	}
 	Equals(t, 1, len(docs))
 	jjFromQuery := docs[0]
 	Equals(t, jj.RID, jjFromQuery.RID)
@@ -1426,8 +1428,8 @@ func TestCommandsNativeAPI(t *testing.T) {
 	Equals(t, "Bruce", docs[0].GetField("name").Value)
 
 	dt := docs[0].GetField("dt").Value.(time.Time)
-	zone, zoneOffset := dt.Zone()
-	zoneLocation := time.FixedZone(zone, zoneOffset)
+	// zone, zoneOffset := dt.Zone()
+	// zoneLocation := time.FixedZone(zone, zoneOffset)
 	expectedTm, err := time.Parse("2006-01-02 03:04:05", "2014-11-25 09:14:54") //time.ParseInLocation("2006-01-02 03:04:05", "2014-11-25 09:14:54", zoneLocation)
 	Nil(t, err)
 	Equals(t, expectedTm.Local().String(), dt.String())
@@ -1439,8 +1441,8 @@ func TestCommandsNativeAPI(t *testing.T) {
 	Equals(t, "Tiger", docs[0].GetField("name").Value)
 
 	birthdayTm := docs[0].GetField("birthday").Value.(time.Time)
-	zone, zoneOffset = birthdayTm.Zone()
-	zoneLocation = time.FixedZone(zone, zoneOffset)
+	zone, zoneOffset := birthdayTm.Zone()
+	zoneLocation := time.FixedZone(zone, zoneOffset)
 	expectedTm, err = time.ParseInLocation("2006-01-02", "2014-11-25", zoneLocation)
 	Nil(t, err)
 	Equals(t, expectedTm.String(), birthdayTm.String())

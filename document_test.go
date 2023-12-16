@@ -1,7 +1,7 @@
 package orient_test
 
 import (
-	"gopkg.in/istreamdata/orientgo.v2"
+	"orient"
 	"reflect"
 	"testing"
 )
@@ -74,10 +74,10 @@ func TestDocumentFromStructEmbeddedAnon(t *testing.T) {
 
 func TestDocumentFromMap(t *testing.T) {
 	doc := orient.NewEmptyDocument()
-	type item struct {
-		Ind  int
-		Name string
-	}
+	// type item struct {
+	// 	Ind  int
+	// 	Name string
+	// }
 	a := map[string]interface{}{"Ind": 11, "Name": "named"}
 	if err := doc.From(a); err != nil {
 		t.Fatal(err)

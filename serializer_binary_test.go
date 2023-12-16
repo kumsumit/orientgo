@@ -7,8 +7,7 @@ import (
 	"reflect"
 	"testing"
 	"time"
-
-	"gopkg.in/istreamdata/orientgo.v2/obinary/rw"
+	"orient/obinary/rw"
 )
 
 func TestDeserializeRecordData(t *testing.T) {
@@ -34,7 +33,7 @@ func TestDeserializeRecordData(t *testing.T) {
 
 func testBase64Compare(t *testing.T, out []byte, origBase64 string) {
 	orig, _ := base64.StdEncoding.DecodeString(origBase64)
-	if bytes.Compare(out, orig) != 0 {
+	if !bytes.Equal(out, orig) {
 		t.Fatalf("different buffers:\n%v\n%v\n", out, orig)
 	}
 }

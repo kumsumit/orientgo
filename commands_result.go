@@ -212,7 +212,6 @@ func convertTypes(targ, src reflect.Value) error {
 			return err
 		}
 		return convertTypes(targ, reflect.ValueOf(m))
-	case *Document: // Document implements DocumentSerializable for convenience, no need to convert it
 	case DocumentSerializable:
 		doc, err := rec.ToDocument()
 		if err != nil {
@@ -220,7 +219,6 @@ func convertTypes(targ, src reflect.Value) error {
 		}
 		return convertTypes(targ, reflect.ValueOf(doc))
 	}
-
 	// Target is now converted, process the result set
 	if src.Kind() == reflect.Slice {
 		switch src.Len() {

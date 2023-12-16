@@ -1,7 +1,7 @@
 package orient
 
 import (
-	"gopkg.in/istreamdata/orientgo.v2/obinary/rw"
+	"orient/obinary/rw"
 	"math/big"
 )
 

@@ -4,8 +4,7 @@ import (
 	"bytes"
 	"io"
 	"reflect"
-
-	"gopkg.in/istreamdata/orientgo.v2/obinary/rw"
+	"orient/obinary/rw"
 )
 
 var (

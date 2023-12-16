@@ -1,35 +1,33 @@
 package orient_test
 
-import (
+// import (
 	//"fmt"
 	//	"sort"
+	// "orient"
+	// "github.com/stretchr/testify/assert"
+	// "testing"
+// )
 
-	"gopkg.in/istreamdata/orientgo.v2"
-	//"gopkg.in/istreamdata/orientgo.v2/oschema"
-	"github.com/stretchr/testify/assert"
-	"testing"
-)
+// func createOgonoriGraphDb(t *testing.T, dbc orient.Client) {
 
-func createOgonoriGraphDb(t *testing.T, dbc orient.Client) {
+// 	sess, err := dbc.Auth(srvUser, srvPass)
+// 	assert.Nil(t, err)
 
-	sess, err := dbc.Auth(srvUser, srvPass)
-	assert.Nil(t, err)
+// 	//	assert.True(t, dbc.GetSessionId() >= int32(0), "sessionid")
+// 	//	assert.True(t, dbc.GetCurrDB() == nil, "currDB should be nil")
 
-	//	assert.True(t, dbc.GetSessionId() >= int32(0), "sessionid")
-	//	assert.True(t, dbc.GetCurrDB() == nil, "currDB should be nil")
+// 	dbexists, err := sess.DatabaseExists(dbGraphName, orient.Persistent)
+// 	assert.Nil(t, err)
+// 	if dbexists {
+// 		dropDatabase(t, dbc, dbGraphName, orient.Persistent)
+// 	}
 
-	dbexists, err := sess.DatabaseExists(dbGraphName, orient.Persistent)
-	assert.Nil(t, err)
-	if dbexists {
-		dropDatabase(t, dbc, dbGraphName, orient.Persistent)
-	}
-
-	err = sess.CreateDatabase(dbGraphName, orient.GraphDB, orient.Persistent)
-	assert.Nil(t, err)
-	dbexists, err = sess.DatabaseExists(dbGraphName, orient.Persistent)
-	assert.Nil(t, err)
-	assert.True(t, dbexists, dbGraphName+" should now exists after creating it")
-}
+// 	err = sess.CreateDatabase(dbGraphName, orient.GraphDB, orient.Persistent)
+// 	assert.Nil(t, err)
+// 	dbexists, err = sess.DatabaseExists(dbGraphName, orient.Persistent)
+// 	assert.Nil(t, err)
+// 	assert.True(t, dbexists, dbGraphName+" should now exists after creating it")
+// }
 
 /*
 func graphCommandsNativeAPI(dbc *obinary.Client, fullTest bool) {

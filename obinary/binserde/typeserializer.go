@@ -4,9 +4,8 @@ import (
 	"fmt"
 	"io"
 	"reflect"
-
-	"gopkg.in/istreamdata/orientgo.v2"
-	"gopkg.in/istreamdata/orientgo.v2/obinary/rw"
+	"orient"
+	"orient/obinary/rw"
 )
 
 // There is apparently a second "binary serialization" system

@@ -3,7 +3,7 @@ package orient
 import (
 	"fmt"
 	"github.com/google/uuid"
-	"gopkg.in/istreamdata/orientgo.v2/obinary/rw"
+	"orient/obinary/rw"
 	"io"
 )
 

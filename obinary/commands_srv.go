@@ -2,9 +2,8 @@ package obinary
 
 import (
 	"io"
-
-	"gopkg.in/istreamdata/orientgo.v2"
-	"gopkg.in/istreamdata/orientgo.v2/obinary/rw"
+    "orient"
+	"orient/obinary/rw"
 )
 
 type Manager struct {

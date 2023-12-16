@@ -4,7 +4,7 @@ package orient
 
 import (
 	"fmt"
-	"gopkg.in/istreamdata/orientgo.v2/obinary/rw"
+	"orient/obinary/rw"
 	"io"
 	"strconv"
 	"strings"
@@ -133,20 +133,20 @@ func ParseRID(s string) (RID, error) {
 	if s == "" {
 		return NewEmptyRID(), nil
 	} else if !strings.Contains(s, string(ridSeparator)) {
-		return NewEmptyRID(), fmt.Errorf("Argument '%s' is not a RecordId in form of string. Format must be: <cluster-id>:<cluster-position>", s)
+		return NewEmptyRID(), fmt.Errorf("argument '%s' is not a RecordId in form of string. Format must be: <cluster-id>:<cluster-position>", s)
 	}
 	s = strings.TrimLeft(s, string(ridPrefix))
 	parts := strings.Split(s, string(ridSeparator))
 	if len(parts) != 2 {
-		return NewEmptyRID(), fmt.Errorf("Argument received '%s' is not a RecordId in form of string. Format must be: #<cluster-id>:<cluster-position>. Example: #3:12", s)
+		return NewEmptyRID(), fmt.Errorf("argument received '%s' is not a RecordId in form of string. Format must be: #<cluster-id>:<cluster-position>. Example: #3:12", s)
 	}
 	id, err := strconv.ParseInt(parts[0], 10, 16)
 	if err != nil {
-		return NewEmptyRID(), fmt.Errorf("Invalid RID string to ParseRID: %s", s)
+		return NewEmptyRID(), fmt.Errorf("invalid RID string to ParseRID: %s", s)
 	}
 	pos, err := strconv.ParseInt(parts[1], 10, 64)
 	if err != nil {
-		return NewEmptyRID(), fmt.Errorf("Invalid RID string to ParseRID: %s", s)
+		return NewEmptyRID(), fmt.Errorf("invalid RID string to ParseRID: %s", s)
 	}
 	return NewRID(int16(id), int64(pos)), nil
 }

@@ -3,7 +3,7 @@ package obinary_test
 import (
 	"bytes"
 	// "fmt"
-	"gopkg.in/istreamdata/orientgo.v2/obinary/rw"
+	"orient/obinary/rw"
 	// "path/filepath"
 	// "reflect"
 	// "runtime"

@@ -6,11 +6,10 @@ import (
 	"io"
 	"log"
 	"net"
+	"orient"
 	"sync"
 	"time"
-
-	"gopkg.in/istreamdata/orientgo.v2"
-	"gopkg.in/istreamdata/orientgo.v2/obinary/rw"
+	"orient/obinary/rw"
 )
 
 func init() {

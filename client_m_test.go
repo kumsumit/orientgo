@@ -14,7 +14,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"gopkg.in/istreamdata/orientgo.v2"
+	"orient"
 )
 
 // Flags - specify these on the cmd line to change from the defaults
@@ -81,22 +81,22 @@ func deleteNewRecordsGraphDB(db orient.Database) {
 	}
 }
 */
-func dropDatabase(t *testing.T, dbc orient.Client, dbname string, dbtype orient.StorageType) {
-	//_ = dbc.Close()
-	sess, err := dbc.Auth(srvUser, srvPass)
-	Nil(t, err)
+// func dropDatabase(t *testing.T, dbc orient.Client, dbname string, dbtype orient.StorageType) {
+// 	//_ = dbc.Close()
+// 	sess, err := dbc.Auth(srvUser, srvPass)
+// 	Nil(t, err)
 
-	err = sess.DropDatabase(dbname, dbtype)
-	Nil(t, err)
-	dbexists, err := sess.DatabaseExists(dbname, orient.Persistent)
-	if err != nil {
-		log.Println(err.Error())
-		return
-	}
-	if dbexists {
-		log.Printf("ERROR: Deletion of database %s failed\n", dbname)
-	}
-}
+// 	err = sess.DropDatabase(dbname, dbtype)
+// 	Nil(t, err)
+// 	dbexists, err := sess.DatabaseExists(dbname, orient.Persistent)
+// 	if err != nil {
+// 		log.Println(err.Error())
+// 		return
+// 	}
+// 	if dbexists {
+// 		log.Printf("ERROR: Deletion of database %s failed\n", dbname)
+// 	}
+// }
 
 /*
 
@@ -962,8 +962,9 @@ func createAndUpdateRecordsWithIntLongFloatAndDouble(dbc orient.Client) {
 }
 */
 func toInt(value interface{}) int {
-	switch value.(type) {
+	switch v := value.(type) {
 	case int:
+		fmt.Printf("%v", v)
 		return value.(int)
 	case int32:
 		return int(value.(int32))
@@ -1002,51 +1003,51 @@ func (slnk byRID) Less(i, j int) bool {
 }
 
 // sort Documents by name field
-type byEmbeddedCatName []interface{}
+// type byEmbeddedCatName []interface{}
 
-func (a byEmbeddedCatName) Len() int {
-	return len(a)
-}
+// func (a byEmbeddedCatName) Len() int {
+// 	return len(a)
+// }
 
-func (a byEmbeddedCatName) Swap(i, j int) {
-	a[i], a[j] = a[j], a[i]
-}
+// func (a byEmbeddedCatName) Swap(i, j int) {
+// 	a[i], a[j] = a[j], a[i]
+// }
 
-func (a byEmbeddedCatName) Less(i, j int) bool {
-	return a[i].(*orient.Document).GetField("name").Value.(string) < a[j].(*orient.Document).GetField("name").Value.(string)
-}
-
-// ------
-
-type byStringVal []interface{}
-
-func (sv byStringVal) Len() int {
-	return len(sv)
-}
-
-func (sv byStringVal) Swap(i, j int) {
-	sv[i], sv[j] = sv[j], sv[i]
-}
-
-func (sv byStringVal) Less(i, j int) bool {
-	return sv[i].(string) < sv[j].(string)
-}
+// func (a byEmbeddedCatName) Less(i, j int) bool {
+// 	return a[i].(*orient.Document).GetField("name").Value.(string) < a[j].(*orient.Document).GetField("name").Value.(string)
+// }
 
 // ------
 
-type byLongVal []interface{}
+// type byStringVal []interface{}
 
-func (sv byLongVal) Len() int {
-	return len(sv)
-}
+// func (sv byStringVal) Len() int {
+// 	return len(sv)
+// }
 
-func (sv byLongVal) Swap(i, j int) {
-	sv[i], sv[j] = sv[j], sv[i]
-}
+// func (sv byStringVal) Swap(i, j int) {
+// 	sv[i], sv[j] = sv[j], sv[i]
+// }
 
-func (sv byLongVal) Less(i, j int) bool {
-	return sv[i].(int64) < sv[j].(int64)
-}
+// func (sv byStringVal) Less(i, j int) bool {
+// 	return sv[i].(string) < sv[j].(string)
+// }
+
+// // ------
+
+// type byLongVal []interface{}
+
+// func (sv byLongVal) Len() int {
+// 	return len(sv)
+// }
+
+// func (sv byLongVal) Swap(i, j int) {
+// 	sv[i], sv[j] = sv[j], sv[i]
+// }
+
+// func (sv byLongVal) Less(i, j int) bool {
+// 	return sv[i].(int64) < sv[j].(int64)
+// }
 
 // ------
 /*

@@ -3,9 +3,8 @@ package obinary
 import (
 	"fmt"
 	"strings"
-
-	"gopkg.in/istreamdata/orientgo.v2"
-	"gopkg.in/istreamdata/orientgo.v2/obinary/rw"
+    "orient"
+	"orient/obinary/rw"
 )
 
 func (c *Client) sendClientInfo(w *rw.Writer) {

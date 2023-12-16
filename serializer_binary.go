@@ -7,8 +7,7 @@ import (
 	"reflect"
 	"runtime"
 	"time"
-
-	"gopkg.in/istreamdata/orientgo.v2/obinary/rw"
+	"orient/obinary/rw"
 )
 
 //func init() {
@@ -93,10 +92,10 @@ func (f BinaryRecordFormat) FromStream(data []byte) (out ORecord, err error) {
 	return doc, nil
 }
 
-type globalProperty struct {
-	Name string
-	Type OType
-}
+// type globalProperty struct {
+// 	Name string
+// 	Type OType
+// }
 
 type binaryRecordFormatV0 struct {
 	getGlobalPropertyFunc GlobalPropertyFunc
@@ -501,7 +500,7 @@ func (f binaryRecordFormatV0) Serialize(doc *Document, w io.Writer, off int, cla
 		bw.WriteInt(0)     // placeholder for data pointer
 		tp := f.getFieldType(entry)
 		if tp == UNKNOWN {
-			return fmt.Errorf("Can't serialize type %T with Document binary serializer", entry.Type)
+			return fmt.Errorf("can't serialize type %T with Document binary serializer", entry.Type)
 		}
 		bw.WriteByte(byte(tp))
 		it.Type = tp

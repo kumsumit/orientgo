@@ -1,10 +1,9 @@
-module orientgo
+module orient
 
 go 1.21.5
 
 require (
 	github.com/mitchellh/mapstructure v1.5.0
-	github.com/nu7hatch/gouuid v0.0.0-20131221200532-179d4d0c4d8d
 )
 
 require (
@@ -37,5 +36,4 @@ require (
 	github.com/fsouza/go-dockerclient v1.10.0
 	github.com/google/uuid v1.5.0 // indirect
 	github.com/stretchr/testify v1.8.4
-	gopkg.in/istreamdata/orientgo.v2 v2.0.0-20181018100136-625dcbcc6aa9
 )

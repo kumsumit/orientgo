@@ -1,10 +1,9 @@
 package orient_test
 
 import (
+	"orient"
+	_ "orient/obinary"
 	"testing"
-
-	"gopkg.in/istreamdata/orientgo.v2"
-	_ "gopkg.in/istreamdata/orientgo.v2/obinary"
 )
 
 // Dial example
