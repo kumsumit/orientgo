@@ -2,8 +2,8 @@ package obinary
 
 import (
 	"fmt"
-	"orient"
-	"orient/obinary/rw"
+	"github.com/kumsumit/orientgo"
+	"github.com/kumsumit/orientgo/obinary/rw"
 )
 
 func (db *Database) serializer() orient.RecordSerializer {
@@ -15,7 +15,11 @@ func (db *Database) updateCachedRecord(rec orient.ORecord) {
 }
 
 func (db *Database) readSynchResult(r *rw.Reader) (result interface{}, err error) {
-	resType := rune(r.ReadByte())
+	bytes,err :=r.ReadByte()
+	if err != nil{
+		fmt.Printf("Error: %v", err)
+	}
+	resType := rune(bytes)
 	if err = r.Err(); err != nil {
 		return nil, err
 	}
@@ -48,7 +52,10 @@ func (db *Database) readSynchResult(r *rw.Reader) (result interface{}, err error
 	case 'i':
 		var recs []orient.OIdentifiable
 		for {
-			status := r.ReadByte()
+			status, err := r.ReadByte()
+			if err != nil {
+				return nil, err
+			}
 			if status <= 0 {
 				break
 			}
@@ -76,7 +83,10 @@ func (db *Database) readSynchResult(r *rw.Reader) (result interface{}, err error
 	}
 	if db.sess.cli.curProtoVers >= ProtoVersion17 {
 		for {
-			status := r.ReadByte()
+			status, err := r.ReadByte()
+			if err != nil {
+				return nil, err
+			}
 			if status <= 0 {
 				break
 			}

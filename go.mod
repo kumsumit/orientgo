@@ -1,4 +1,4 @@
-module orient
+module github.com/kumsumit/orientgo
 
 go 1.21.5
 

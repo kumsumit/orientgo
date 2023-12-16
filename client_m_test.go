@@ -14,7 +14,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"orient"
+	"github.com/kumsumit/orientgo"
 )
 
 // Flags - specify these on the cmd line to change from the defaults

@@ -3,7 +3,7 @@ package orient
 import (
 	"bytes"
 	"fmt"
-	"orient/obinary/rw"
+	"github.com/kumsumit/orientgo/obinary/rw"
 	"io"
 )
 

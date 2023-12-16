@@ -13,7 +13,7 @@ import (
 	"sync"
 	"testing"
 	"time"
-	"orient"
+	"github.com/kumsumit/orientgo"
 )
 
 func init() {

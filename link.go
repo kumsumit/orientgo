@@ -2,9 +2,11 @@ package orient
 
 import (
 	"fmt"
-	"github.com/google/uuid"
-	"orient/obinary/rw"
 	"io"
+	"log"
+
+	"github.com/google/uuid"
+	"github.com/kumsumit/orientgo/obinary/rw"
 )
 
 type OIdentifiableCollection interface {
@@ -38,7 +40,10 @@ func (bag *RidBag) SetOwner(doc *Document) {
 }
 func (bag *RidBag) FromStream(r io.Reader) error {
 	br := rw.NewReader(r)
-	first := br.ReadByte()
+	first,err := br.ReadByte()
+	if err != nil{
+		log.Printf("Error Occurred: %v", err)
+	}
 	if err := br.Err(); err != nil {
 		return err
 	}
@@ -178,7 +183,9 @@ func (bag *sbTreeRidBag) deserializeChanges(r *rw.Reader) (err error) {
 			return err
 		}
 		chval := int(r.ReadInt())
-		chtp := int(r.ReadByte())
+		bytes, err:= r.ReadByte()
+		if err != nil{fmt.Printf( "Error: %v",err)}
+		chtp := int(bytes)
 		arr := changes[rid]
 		switch chtp {
 		case 1: // abs

@@ -7,7 +7,8 @@ import (
 	"reflect"
 	"runtime"
 	"time"
-	"orient/obinary/rw"
+
+	"github.com/kumsumit/orientgo/obinary/rw"
 )
 
 //func init() {
@@ -76,7 +77,10 @@ func (f BinaryRecordFormat) FromStream(data []byte) (out ORecord, err error) {
 
 	r := bytes.NewReader(data)
 	br := rw.NewReadSeeker(r)
-	vers := br.ReadByte()
+	vers, err := br.ReadByte()
+	if err != nil{
+		return
+	}
 	if err = br.Err(); err != nil {
 		return
 	}
@@ -187,7 +191,7 @@ func (f binaryRecordFormatV0) Deserialize(doc *Document, r *rw.ReadSeeker) error
 	}
 	return r.Err()
 }
-func (f binaryRecordFormatV0) readByte(r *rw.ReadSeeker) byte {
+func (f binaryRecordFormatV0) readByte(r *rw.ReadSeeker) (byte, error) {
 	return r.ReadByte()
 }
 func (f binaryRecordFormatV0) readBinary(r *rw.ReadSeeker) []byte {
@@ -200,7 +204,11 @@ func (f binaryRecordFormatV0) readInteger(r *rw.ReadSeeker) int32 {
 	return r.ReadInt()
 }
 func (f binaryRecordFormatV0) readOType(r *rw.ReadSeeker) OType {
-	return OType(f.readByte(r))
+	byte, err := f.readByte(r)
+	if err != nil{
+       fmt.Printf("Error : %v", err)
+	}
+	return OType(byte)
 }
 func (f binaryRecordFormatV0) readOptimizedLink(r *rw.ReadSeeker) RID {
 	return RID{ClusterID: int16(r.ReadVarint()), ClusterPos: int64(r.ReadVarint())}
@@ -388,9 +396,17 @@ func (f binaryRecordFormatV0) readSingleValue(r *rw.ReadSeeker, valueType OType,
 	case FLOAT:
 		value = r.ReadFloat()
 	case BYTE:
-		value = f.readByte(r)
+		bytes, err := f.readByte(r)
+		if err != nil{
+			fmt.Printf("Error: %v", bytes)
+		}
+		value = bytes
 	case BOOLEAN:
-		value = f.readByte(r) == 1
+		val, err:= f.readByte(r)
+		if err != nil{
+			fmt.Printf("Error: %v", val)
+		}
+		value =  val== 1
 	case DATETIME:
 		longTime := r.ReadVarint()
 		value = time.Unix(longTime/1000, (longTime%1000)*1e6)

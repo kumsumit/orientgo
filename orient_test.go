@@ -10,8 +10,8 @@ import (
 	"testing"
 	"time"
 	"github.com/fsouza/go-dockerclient"
-	"orient"
-	_ "orient/obinary"
+	"github.com/kumsumit/orientgo"
+	_ "github.com/kumsumit/orientgo/obinary"
 	"reflect"
 )
 

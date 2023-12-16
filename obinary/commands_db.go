@@ -3,8 +3,8 @@ package obinary
 import (
 	"fmt"
 	"strings"
-    "orient"
-	"orient/obinary/rw"
+    "github.com/kumsumit/orientgo"
+	"github.com/kumsumit/orientgo/obinary/rw"
 )
 
 func (c *Client) sendClientInfo(w *rw.Writer) {
@@ -249,7 +249,11 @@ func (db *Database) DeleteRecordByRID(rid orient.RID, recVersion int) error {
 		w.WriteByte(0) // sync mode ; 0 = synchronous; 1 = asynchronous
 		return w.Err()
 	}, func(r *rw.Reader) error {
-		status = r.ReadByte()
+		byte, err := r.ReadByte()
+		if(err != nil){
+			return err
+		}
+		status = byte
 		return r.Err()
 	})
 	if err != nil {
@@ -280,7 +284,11 @@ func (db *Database) GetRecordByRID(rid orient.RID, fetchPlan orient.FetchPlan, i
 		}
 		return w.Err()
 	}, func(r *rw.Reader) error {
-		if r.ReadByte() == 0 {
+		bytes, err := r.ReadByte()
+		if err != nil{
+			return err
+		}
+		if bytes == 0 {
 			return r.Err()
 		}
 		var (
@@ -291,9 +299,17 @@ func (db *Database) GetRecordByRID(rid orient.RID, fetchPlan orient.FetchPlan, i
 		if db.sess.cli.curProtoVers <= ProtoVersion27 {
 			content = r.ReadBytes()
 			version = int(r.ReadInt())
-			recType = orient.RecordType(r.ReadByte())
+			bytes, err:=r.ReadByte()
+			if err != nil{
+				return err
+			}
+			recType = orient.RecordType(bytes)
 		} else {
-			recType = orient.RecordType(r.ReadByte())
+			bytes,err := r.ReadByte()
+			if(err != nil){
+                return err
+			}
+			recType = orient.RecordType(bytes)
 			version = int(r.ReadInt())
 			content = r.ReadBytes()
 		}
@@ -309,7 +325,10 @@ func (db *Database) GetRecordByRID(rid orient.RID, fetchPlan orient.FetchPlan, i
 			return err
 		}
 		for {
-			status := r.ReadByte()
+			status, err := r.ReadByte()
+			if err != nil{
+				return err
+			}
 			if status != 2 {
 				break
 			}
@@ -383,7 +402,10 @@ func (db *Database) DropCluster(clusterName string) error {
 	err = db.sess.sendCmd(requestDataClusterDROP, func(w *rw.Writer) error {
 		return w.WriteShort(clusterID)
 	}, func(r *rw.Reader) error {
-		status = r.ReadByte()
+		status, err = r.ReadByte()
+		if(err != nil){
+			return err
+		}
 		return r.Err()
 	})
 	if err == nil && status != byte(1) {

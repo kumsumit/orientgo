@@ -2,8 +2,8 @@ package obinary
 
 import (
 	"io"
-    "orient"
-	"orient/obinary/rw"
+    "github.com/kumsumit/orientgo"
+	"github.com/kumsumit/orientgo/obinary/rw"
 )
 
 type Manager struct {

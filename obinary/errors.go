@@ -2,7 +2,7 @@ package obinary
 
 import (
 	"fmt"
-	"orient"
+	"github.com/kumsumit/orientgo"
 	"regexp"
 	"strings"
 )

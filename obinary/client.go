@@ -6,10 +6,10 @@ import (
 	"io"
 	"log"
 	"net"
-	"orient"
+	"github.com/kumsumit/orientgo"
 	"sync"
 	"time"
-	"orient/obinary/rw"
+	"github.com/kumsumit/orientgo/obinary/rw"
 )
 
 func init() {
@@ -224,7 +224,10 @@ func readErrorResponse(r *rw.Reader, protoVers int) (serverException error) {
 	exc := make([]orient.Exception, 0, 1) // usually only one ?
 	for {
 		// before class/message combo there is a 1 (continue) or 0 (no more)
-		marker := r.ReadByte()
+		marker, err := r.ReadByte()
+		if err != nil{
+			log.Printf("Error Occurred: %v", err)
+		}
 		if marker == byte(0) {
 			break
 		}
@@ -251,11 +254,13 @@ func readErrorResponse(r *rw.Reader, protoVers int) (serverException error) {
 func (c *Client) run() error {
 	defer close(c.done)
 	var (
-		status byte
 		sessId int32
 	)
 	for { // TODO: close safely
-		status = c.pr.ReadByte()
+		status, err := c.pr.ReadByte()
+		if err != nil{
+			log.Printf("Error Occurred: %v", err)
+		}
 		sessId = c.pr.ReadInt()
 		if err := c.pr.Err(); err != nil {
 			return err
@@ -374,7 +379,11 @@ func (db *Database) readIdentifiable(r *rw.Reader) (orient.OIdentifiable, error)
 		}
 		return rid, nil
 	default:
-		tp := orient.RecordType(r.ReadByte())
+		readByte, err :=r.ReadByte()  
+		if err != nil{
+			log.Printf("Error Occurred: %v", err)
+		}
+		tp := orient.RecordType(readByte)
 		if err := r.Err(); err != nil {
 			return nil, err
 		}

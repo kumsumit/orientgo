@@ -2,7 +2,7 @@ package orient_test
 
 import (
 	"bytes"
-	"orient"
+	"github.com/kumsumit/orientgo"
 	"testing"
 )
 

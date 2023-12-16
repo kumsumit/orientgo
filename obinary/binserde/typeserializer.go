@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"io"
 	"reflect"
-	"orient"
-	"orient/obinary/rw"
+	"github.com/kumsumit/orientgo"
+	"github.com/kumsumit/orientgo/obinary/rw"
 )
 
 // There is apparently a second "binary serialization" system

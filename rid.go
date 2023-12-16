@@ -4,7 +4,7 @@ package orient
 
 import (
 	"fmt"
-	"orient/obinary/rw"
+	"github.com/kumsumit/orientgo/obinary/rw"
 	"io"
 	"strconv"
 	"strings"

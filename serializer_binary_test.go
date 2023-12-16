@@ -7,7 +7,7 @@ import (
 	"reflect"
 	"testing"
 	"time"
-	"orient/obinary/rw"
+	"github.com/kumsumit/orientgo/obinary/rw"
 )
 
 func TestDeserializeRecordData(t *testing.T) {

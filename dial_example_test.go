@@ -1,8 +1,8 @@
 package orient_test
 
 import (
-	"orient"
-	_ "orient/obinary"
+	"github.com/kumsumit/orientgo"
+	_ "github.com/kumsumit/orientgo/obinary"
 	"testing"
 )
 

@@ -1,7 +1,7 @@
 package orient_test
 
 import (
-	"orient"
+	"github.com/kumsumit/orientgo"
 	"reflect"
 	"testing"
 )

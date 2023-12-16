@@ -1,7 +1,7 @@
 package orient
 
 import (
-	"orient/obinary/rw"
+	"github.com/kumsumit/orientgo/obinary/rw"
 	"math/big"
 )
 

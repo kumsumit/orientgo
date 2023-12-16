@@ -1,7 +1,7 @@
 package obinary
 
 import (
-	"orient"
+	"github.com/kumsumit/orientgo"
 	"strconv"
 	"strings"
 	"sync"

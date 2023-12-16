@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"io"
 	"reflect"
-	"orient/obinary/rw"
+	"github.com/kumsumit/orientgo/obinary/rw"
 )
 
 var (

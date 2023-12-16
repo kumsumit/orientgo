@@ -90,10 +90,10 @@ func (r *Reader) ReadString() string {
 	return string(r.ReadBytes())
 }
 
-func (r *Reader) ReadByte() byte {
+func (r *Reader) ReadByte() (byte, error) {
 	readbuf := make([]byte, 1)
-	r.Read(readbuf)
-	return readbuf[0]
+	_,err := r.Read(readbuf)
+	return readbuf[0], err
 }
 
 func (r *Reader) ReadInt() (v int32) {
@@ -125,7 +125,11 @@ func (r *Reader) ReadDouble() (v float64) {
 // otherwise true.  If error is non-nil, then the bool value is undefined.
 func (r *Reader) ReadBool() bool {
 	// non-zero is true
-	return r.ReadByte() != byte(0)
+    readByte, err := r.ReadByte()
+	if err != nil{
+		return false
+	}
+	return  readByte!= byte(0)
 }
 
 type ByteReader interface {
@@ -138,7 +142,11 @@ type byteReader struct {
 }
 
 func (r byteReader) ReadByte() (byte, error) {
-	return r.r.ReadByte(), r.r.Err()
+	byteRead, err := r.r.ReadByte()
+	if err != nil{
+		return 0, err
+	}
+	return byteRead , r.r.Err()
 }
 
 // ReadVarIntAndDecode64 reads a varint from r to a uint64
@@ -173,7 +181,7 @@ func (r *Reader) ReadBytesVarint() []byte {
 	if lenbytes == 0 {
 		return nil
 	} else if lenbytes < 0 {
-		panic(fmt.Errorf("Error in varint.ReadBytes: size of bytes was less than zero: %v", lenbytes))
+		panic(fmt.Errorf("error in varint.ReadBytes: size of bytes was less than zero: %v", lenbytes))
 	}
 
 	data := make([]byte, int(lenbytes))

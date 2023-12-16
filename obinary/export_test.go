@@ -1,7 +1,7 @@
 package obinary
 
 import (
-	"orient/obinary/rw"
+	"github.com/kumsumit/orientgo/obinary/rw"
 )
 
 func ReadErrorResponse(r *rw.Reader) (serverException error) {
