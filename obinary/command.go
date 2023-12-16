@@ -125,9 +125,9 @@ func (db *Database) Command(cmd orient.CustomSerializable) (result interface{}, 
 			if err != nil {
 				return err
 			}
-			if live {
-				// TODO: live
-			}
+			// if live {
+			// 	// TODO: live
+			// }
 		}
 		return r.Err()
 	})

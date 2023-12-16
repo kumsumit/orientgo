@@ -36,7 +36,7 @@ func TestResultsRecordToMap(t *testing.T) {
 	}
 	var dst map[string]*Item
 	testResults(t, doc, &dst, map[string]*Item{
-		"one": &Item{"record"},
+		"one": {"record"},
 	})
 }
 

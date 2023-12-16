@@ -64,21 +64,21 @@ const (
 	requestDbLIST                        = 74 // SINCE 1.0rc6
 	requestPushDistribConfig             = 80
 	// DISTRIBUTED
-	requestDbCOPY      = 90 // SINCE 1.0rc8
-	requestREPLICATION = 91 // SINCE 1.0
-	requestCLUSTER     = 92 // SINCE 1.0
-	requestDbTRANSFER  = 93 // SINCE 1.0.2
+	// requestDbCOPY      = 90 // SINCE 1.0rc8
+	// requestREPLICATION = 91 // SINCE 1.0
+	// requestCLUSTER     = 92 // SINCE 1.0
+	// requestDbTRANSFER  = 93 // SINCE 1.0.2
 	// Lock + sync
-	requestDbFREEZE           = 94 // SINCE 1.1.0
-	requestDbRELEASE          = 95 // SINCE 1.1.0
-	requestDataClusterFREEZE  = 96
-	requestDataClusterRELEASE = 97
+	// requestDbFREEZE           = 94 // SINCE 1.1.0
+	// requestDbRELEASE          = 95 // SINCE 1.1.0
+	// requestDataClusterFREEZE  = 96
+	// requestDataClusterRELEASE = 97
 	// REMOTE SB-TREE COLLECTIONS
-	requestCREATE_SBTREE_BONSAI            = 110
-	requestSBTREE_BONSAI_GET               = 111
-	requestSBTREE_BONSAI_FIRST_KEY         = 112
-	requestSBTREE_BONSAI_GET_ENTRIES_MAJOR = 113
-	requestRIDBAG_GET_SIZE                 = 114
+	// requestCREATE_SBTREE_BONSAI            = 110
+	// requestSBTREE_BONSAI_GET               = 111
+	// requestSBTREE_BONSAI_FIRST_KEY         = 112
+	// requestSBTREE_BONSAI_GET_ENTRIES_MAJOR = 113
+	// requestRIDBAG_GET_SIZE                 = 114
 
 	// INCOMING
 	responseStatusOk    = 0

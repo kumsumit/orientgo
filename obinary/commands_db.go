@@ -259,7 +259,7 @@ func (db *Database) DeleteRecordByRID(rid orient.RID, recVersion int) error {
 	// status 1 means record was deleted;
 	// status 0 means record was not deleted (either failed or didn't exist)
 	if status == byte(0) {
-		return fmt.Errorf("Record %s was not deleted. Either failed or did not exist.", rid)
+		return fmt.Errorf("record %s was not deleted. Either failed or did not exist", rid)
 	}
 	return nil
 }
@@ -388,7 +388,7 @@ func (db *Database) DropCluster(clusterName string) error {
 		return r.Err()
 	})
 	if err == nil && status != byte(1) {
-		err = fmt.Errorf("Drop cluster failed. Return code: %d.", status)
+		err = fmt.Errorf("drop cluster failed. Return code: %d", status)
 	}
 	return err
 }

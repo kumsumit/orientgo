@@ -322,7 +322,7 @@ func (doc *Document) SetSerializer(ser RecordSerializer) {
 	doc.ser = ser
 }
 func (doc *Document) Fill(rid RID, version int, content []byte) error {
-	doc.serialized = doc.serialized || doc.BytesRecord.Data == nil || bytes.Compare(content, doc.BytesRecord.Data) != 0
+	doc.serialized = doc.serialized || doc.BytesRecord.Data == nil || !bytes.Equal(content, doc.BytesRecord.Data)
 	return doc.BytesRecord.Fill(rid, version, content)
 }
 func (doc *Document) RecordType() RecordType { return RecordTypeDocument }

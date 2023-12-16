@@ -9,7 +9,6 @@ import (
 	"os"
 	"testing"
 	"time"
-
 	"github.com/fsouza/go-dockerclient"
 	"gopkg.in/istreamdata/orientgo.v2"
 	_ "gopkg.in/istreamdata/orientgo.v2/obinary"
@@ -78,7 +77,7 @@ func SpinOrientServer(t *testing.T) (string, func()) {
 	cont, err := cl.CreateContainer(docker.CreateContainerOptions{
 		Config: &docker.Config{
 			OpenStdin: true, Tty: true,
-			ExposedPorts: map[docker.Port]struct{}{dport_api: struct{}{}, dport_web: struct{}{}},
+			ExposedPorts: map[docker.Port]struct{}{dport_api: {}, dport_web: {}},
 			Image:        `dennwc/orientdb:` + orientVersion,
 		}, HostConfig: &docker.HostConfig{
 			PortBindings: binds,
@@ -641,7 +640,7 @@ var docs = (new com.orientechnologies.orient.core.record.impl.ODocument()).fromJ
 		t.Fatal(err)
 	} else if len(out) != 1 {
 		t.Error("wrong docs count")
-	} else if !reflect.DeepEqual(out, map[string]*Item{"one": &Item{"record"}}) {
+	} else if !reflect.DeepEqual(out, map[string]*Item{"one": {"record"}}) {
 		t.Error("wrong data returned")
 	}
 }

@@ -263,7 +263,7 @@ func (f binaryRecordFormatV0) readLinkMap(r *rw.ReadSeeker, doc *Document) (inte
 	}
 	if len(keyTypes) == 1 { // TODO: reflect-based converter
 		tp := UNKNOWN
-		for k, _ := range keyTypes {
+		for k := range keyTypes {
 			tp = k
 			break
 		}
@@ -337,7 +337,7 @@ func (f binaryRecordFormatV0) readEmbeddedMap(r *rw.ReadSeeker, doc *Document) (
 		valType reflect.Type = UNKNOWN.ReflectType()
 	)
 	if len(keyTypes) == 1 {
-		for k, _ := range keyTypes {
+		for k := range keyTypes {
 			if k == UNKNOWN {
 				return result, nil
 			}
@@ -348,7 +348,7 @@ func (f binaryRecordFormatV0) readEmbeddedMap(r *rw.ReadSeeker, doc *Document) (
 		panic(fmt.Errorf("map with different key type: %+v", keyTypes))
 	}
 	if len(valueTypes) == 1 {
-		for v, _ := range valueTypes {
+		for v := range valueTypes {
 			valType = v.ReflectType()
 			break
 		}

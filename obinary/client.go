@@ -287,17 +287,17 @@ type session struct {
 	cli *Client
 }
 
-func (s *session) catch(err *error) {
-	if r := recover(); r != nil {
-		switch rr := r.(type) {
-		case error:
-			*err = rr
-		default:
-			*err = fmt.Errorf("%v", r)
-		}
-		go s.cli.Close() // panic means that stream is likely to be broken
-	}
-}
+// func (s *session) catch(err *error) {
+// 	if r := recover(); r != nil {
+// 		switch rr := r.(type) {
+// 		case error:
+// 			*err = rr
+// 		default:
+// 			*err = fmt.Errorf("%v", r)
+// 		}
+// 		go s.cli.Close() // panic means that stream is likely to be broken
+// 	}
+// }
 
 func (s *session) sendCmd(op byte, wr func(*rw.Writer) error, rd func(*rw.Reader) error) error {
 	s.mu.Lock()
