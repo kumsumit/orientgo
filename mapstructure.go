@@ -1,7 +1,7 @@
 package orient
 
 import (
-	"github.com/mitchellh/mapstructure"
+	"github.com/kumsumit/mapstructure"
 	"reflect"
 	"time"
 )
